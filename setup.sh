@@ -24,10 +24,31 @@ sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>
 
 brew install openssl httpd php mysql dnsmasq
 
+# Setup Python
 
+brew install pyenv
 
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 
-brew install --cask visual-studio-code
+exec "$SHELL"
+
+pyenv install 3.11
+pyenv global 3.11
+
+# Install some tools
+
+brew install git iperf3 pandoc speedtest-cli 
+
+brew install --cask geekbench mactex spyder thonny visual-studio-code zoom
+
+# Read each line from the file vscode_extensions.txt
+while IFS= read -r extension || [[ -n $extension ]]; do
+    # Install each vscode extension
+    code --install-extension "$extension" --force
+done < vscode_extensions.txt
+
 
 # Change the macOS dock show/hide speeds
 defaults write com.apple.dock autohide-delay -float 0; defaults write com.apple.dock autohide-time-modifier -float 0.4;killall Dock
