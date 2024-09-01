@@ -2,13 +2,22 @@
 
 # Setup for a fresh install of macOS
 
+# Define color codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
 # Install oh-my-zsh
+echo -e "${YELLOW}==>${NC} Installing Oh My ZSH! You can thank me later."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install XCode Command Line Tools
+echo -e "${YELLOW}==>${NC} Installing XCode Command Line Tools."  
 xcode-select --install
 
 # Install homebrew and update paths
+echo -e "${YELLOW}==>${NC} Installing Homebrew. The package manager for macOS."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -39,7 +48,7 @@ pyenv global 3.11
 
 # Install some tools
 
-brew install git iperf3 pandoc speedtest-cli 
+brew install git iperf3 pandoc speedtest-cli wp-cli
 
 brew install --cask geekbench mactex spyder thonny visual-studio-code zoom
 
